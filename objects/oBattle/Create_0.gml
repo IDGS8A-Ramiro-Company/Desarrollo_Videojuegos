@@ -10,9 +10,24 @@ turnCount = 0;
 roundCount = 0;
 battleWaitTimeFrames = 30;
 battleWaitTimeRemaining = 0;
+battleText = "";
 currentUser = noone;
 currentAction = -1;
 currentTargets = noone;
+
+
+//Targetting Cursor
+cursor =
+{
+	activeUser: noone,
+	activeTarget: noone,
+	activeAction: -1,
+	targetSide: -1,
+	targetIndex: 0,
+	targetAll: false,
+	confirmDelay: 0,
+	active: false
+}
 
 
 for (var i = 0; i < array_length(enemies); i++)
@@ -45,34 +60,75 @@ RefreshRenderOrder();
 
 function BattleStateSelectAction()
 {
-	//Get current unit 
-	var _unit = unitTurnOrder[turn];
-	
-	//Is the unit dead or unable too act?
-	if(!instance_exists(_unit)) || (_unit.hp <= 0)
+	if(!instance_exists(oMenu))
 	{
-		battleState = BattleStateVictoryCheck;
-		exit;
-	}
+		
+		//Get current unit 
+		var _unit = unitTurnOrder[turn];
 	
-	//Select an action to perform
-	//BeginAction(_unit.id, global.actionLibrary.attack, _unit.id)
-	
-	//If unit is player controlled
-	if(_unit.object_index == oBattleUnitPC)
-	{
-		var _action = global.actionLibrary.attack;
-		var _possibleTargets = array_filter(oBattle.enemyUnits, function(_unit, _index)
+		//Is the unit dead or unable too act?
+		if(!instance_exists(_unit)) || (_unit.hp <= 0)
 		{
-			return (_unit.hp > 0);
-		});
-		var _target = _possibleTargets[irandom(array_length(_possibleTargets)-1)];
-		BeginAction(_unit.id, _action, _target);
-	}
-	else
-	{
-		var _enemyAction = _unit.AIscript();
-		if(_enemyAction != -1) BeginAction(_unit.id, _enemyAction[0], _enemyAction[1])
+			battleState = BattleStateVictoryCheck;
+			exit;
+		}
+	
+		//Select an action to perform
+		//BeginAction(_unit.id, global.actionLibrary.attack, _unit.id)
+	
+		//If unit is player controlled
+		if(_unit.object_index == oBattleUnitPC)
+		{
+			//var _action = global.actionLibrary.attack;
+			//var _possibleTargets = array_filter(oBattle.enemyUnits, function(_unit, _index)
+			//{
+			//	return (_unit.hp > 0);
+			//});
+			//var _target = _possibleTargets[irandom(array_length(_possibleTargets)-1)];
+			//BeginAction(_unit.id, _action, _target);
+			var _menuOptions = [];
+			var _subMenus = {};
+			
+			var _actionList = _unit.actions;
+			
+			for(var i = 0; i < array_length(_actionList); i++)
+			{
+				var _action = _actionList[i];
+				var _available = true;
+				var _nameAndCount = _action.name;
+				if(_action.subMenu == -1)
+				{
+					array_push(_menuOptions, [_nameAndCount, MenuSelectAction, [_unit, _action], _available]);
+				}
+				else
+				{
+					if (is_undefined(_subMenus[$ _action.subMenu]))
+					{
+						variable_struct_set(_subMenus, _action.subMenu, [[_nameAndCount, MenuSelectAction, [_unit, _action], _available]]);
+					}
+					else
+					{
+						array_push(_subMenus[$ _action.subMenu], [_nameAndCount, MenuSelectAction, [_unit, _action], _available]);
+					}
+				}
+			}
+			
+			var _subMenusArray = variable_struct_get_names(_subMenus);
+			
+			for (var i = 0; i < array_length(_subMenusArray); i++)
+			{
+				array_push(_subMenus[$ _subMenusArray[i]], ["Back", MenuGoBack, -1, true]);
+					
+				array_push(_menuOptions, [_subMenusArray[i], SubMenu, [_subMenus[$ _subMenusArray[i]]], true]);
+			}
+			Menu(x + 10, y + 110, _menuOptions, , 74, 60);
+			
+		}
+		else
+		{
+			var _enemyAction = _unit.AIscript();
+			if(_enemyAction != -1) BeginAction(_unit.id, _enemyAction[0], _enemyAction[1])
+		}
 	}
 }
 
@@ -81,6 +137,7 @@ function BeginAction(_user, _action, _targets)
 	currentUser = _user;
 	currentAction = _action;
 	currentTargets = _targets;
+	battleText = string_ext(_action.description, [_user.name]);
 	
 	if(!is_array(currentTargets)) currentTargets = [currentTargets];
 	battleWaitTimeRemaining = battleWaitTimeFrames;
@@ -125,9 +182,11 @@ function BattleStatePerformAction()
 				}
 				else //Play it at 0,0
 				{
-					var _effectSprite = currentAction._effectSprite
+					var _effectSprite = currentAction._effectSprite;
+					var _effectSound = currentAction._effectSound;
 					if(variable_struct_exists(currentAction, "effectSpriteNoTarget")) _effectSprite = currentAction.effectSpriteNoTarget;
-					instance_create_depth(x,y,depth-100, oBattleEffect, {sprite_index: _effectSprite});
+					instance_create_depth(x, y, depth-100, oBattleEffect, {sprite_index: _effectSprite});
+					audio_play_sound(_effectSound, 10, false);
 				}
 			}
 			currentAction.func(currentUser, currentTargets);
@@ -148,11 +207,35 @@ function BattleStatePerformAction()
 
 function BattleStateVictoryCheck()
 {
+	
+	var win = true;
+	
+	for(var i = 0; i < array_length(enemyUnits); i++)
+	{
+		if (enemyUnits[i].hp > 0)
+	    {
+			win = false;
+	    }
+	}
+	
+	if(win)
+	{
+		for(var i = 0; i < array_length(partyUnits); i++)
+		{
+			global.party[i].hp = partyUnits[i].hp;
+			global.party[i].mp = partyUnits[i].mp;
+		}
+		instance_activate_all();
+		instance_destroy(oBattle);
+		instance_destroy(creator);
+		exit;
+	}
 	battleState = BattleStateTurnProgression;
 }
 
 function BattleStateTurnProgression()
 {
+	battleText = "";
 	turnCount++;
 	turn++;
 	//Loop turns
