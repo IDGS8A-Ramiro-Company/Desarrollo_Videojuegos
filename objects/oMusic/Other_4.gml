@@ -1,6 +1,11 @@
 /// @description Insert description here
 // You can write your code in this editor
-if (room == Room1)
+if (room == rmField)
 {
-	SetSongInGame( sndBGMEarth, 60, 0);
+	SetSongInGame( sndBGMEarth, 60, 10*60);
+}
+
+if (room == rmCity)
+{
+	SetSongInGame( sndBGMCity, 30, 0);
 }

@@ -1,4 +1,6 @@
-instance_deactivate_all(true);
+//instance_deactivate_all(true);
+instance_deactivate_layer("Instances")
+SetSongInGame(sndBGMBattle, 0, 0);
 
 units = [];
 
@@ -207,7 +209,6 @@ function BattleStatePerformAction()
 
 function BattleStateVictoryCheck()
 {
-	
 	var win = true;
 	
 	for(var i = 0; i < array_length(enemyUnits); i++)
@@ -220,17 +221,32 @@ function BattleStateVictoryCheck()
 	
 	if(win)
 	{
-		for(var i = 0; i < array_length(partyUnits); i++)
-		{
-			global.party[i].hp = partyUnits[i].hp;
-			global.party[i].mp = partyUnits[i].mp;
-		}
+		battleState = BattleStateWin;
+	}
+	else
+	{
+		battleState = BattleStateTurnProgression;
+	}
+	
+}
+
+function BattleStateWin()
+{
+	for(var i = 0; i < array_length(partyUnits); i++)
+	{
+		global.party[i].hp = partyUnits[i].hp;
+		global.party[i].mp = partyUnits[i].mp;
+	}
+	battleText = "You Won";
+	SetSongInGame(sndWon,0,0);
+	
+	if(keyboard_check_pressed(vk_enter))
+	{
+		SetSongInGame(sndBGMEarth, 60, 10*60);
 		instance_activate_all();
 		instance_destroy(oBattle);
-		instance_destroy(creator);
 		exit;
 	}
-	battleState = BattleStateTurnProgression;
 }
 
 function BattleStateTurnProgression()

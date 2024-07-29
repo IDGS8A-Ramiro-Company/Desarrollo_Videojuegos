@@ -45,6 +45,29 @@ global.actionLibrary =
 			}
 			BattleChangeMP(_user, -mpCost)
 		}
+	},
+	fire:
+	{
+		name: "Fire",
+		description: "{0} casts Fire!",
+		subMenu: "Magic",
+		mpCost: 4,
+		targetRequired: true,
+		targetEnemyByDefault: true,
+		targetAll: MODE.VARIES,
+		userAnimation: "cast",
+		effectSprite: sAttackFire,
+		effectOnTarget: MODE.ALWAYS,
+		func: function(_user, _targets)
+		{
+			for (var i = 0; i < array_length(_targets); i++)
+			{
+				var _damage = irandom_range(15,20);
+				if(array_length (_targets) > 1) _damage = ceil(_damage * 0.75);
+				BattleChangeHP(_targets[i], -_damage);
+			}
+			BattleChangeMP(_user, -mpCost)
+		}
 	}
 }
 

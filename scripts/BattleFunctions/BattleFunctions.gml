@@ -1,5 +1,5 @@
 function NewEncounter(_enemies, _bg)
-{
+{	
 	instance_create_depth
 	(
 	camera_get_view_x(view_camera[0]),
@@ -8,6 +8,14 @@ function NewEncounter(_enemies, _bg)
 	oBattle,
 	{enemies: _enemies, creator: id, battleBackground: _bg}
 	)
+}
+
+function NewBattleAnimation(_enemies, _bg)
+{
+	if (!instance_exists(oBattleWarp))
+	{
+		instance_create_depth(0, 0, -99999, oBattleWarp, {enemies: _enemies, creator: id, battleBackground: _bg});
+	}
 }
 
 function BattleChangeHP(_target, _amount, _AliveDeadOrEither = 0)

@@ -1,4 +1,6 @@
-audio_pause_all();
-audio_play_sound(sndBattleStart, 0, false);
-while audio_is_playing(sndBattleStart) {}
-NewEncounter([global.enemies.slimeG, global.enemies.slimeG], sBgCity);
+if(!instance_exists(oBattleWarp))
+{
+	NewBattleAnimation([global.enemies.slimeG, global.enemies.slimeG], sBgCity);
+}
+SetSongInGame(sndBattleStart, 0, 0);
+instance_destroy(self);

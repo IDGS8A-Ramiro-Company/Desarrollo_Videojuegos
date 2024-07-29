@@ -8,9 +8,9 @@ if (songAsset != targetSongAsset)
 	{
 		array_push(fadeOutInstances, songInstance);
 		
-		array_push(fadeInInstanceVol, fadeInInstanceVol);
+		array_push(fadeOutInstanceVol, fadeInInstanceVol);
 		
-		array_push( fadeOutInstanceTime, endFadeOutTime);
+		array_push(fadeOutInstanceTime, endFadeOutTime);
 		
 		songInstance = noone;
 		songAsset = noone;
@@ -59,17 +59,17 @@ for (var i = 0; i < array_length(fadeOutInstances); i++)
 {
 	if (fadeOutInstanceTime[i] > 0)
 	{
-		if (fadeInInstanceVol[i] > 0)
+		if (fadeOutInstanceVol[i] > 0)
 		{
-			fadeInInstanceVol[i] -= 1/fadeOutInstanceTime[i];
+			fadeOutInstanceVol[i] -= 1/fadeOutInstanceTime[i];
 		}
 	}
 	else
 	{
-		fadeInInstanceVol[i] = 0;
+		fadeOutInstanceVol[i] = 0;
 	}
 	
-	audio_sound_gain(fadeOutInstances[i], fadeOutInstanceVol * _finalVolume, 0);
+	audio_sound_gain(fadeOutInstances[i], fadeOutInstanceVol[i] * _finalVolume, 0);
 	
 	if (fadeOutInstanceVol[i] <= 0)
 	{
