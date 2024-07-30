@@ -68,6 +68,30 @@ global.actionLibrary =
 			}
 			BattleChangeMP(_user, -mpCost)
 		}
+	},
+	heal:
+	{
+		name: "Heal",
+		description: "{0} casts Heal!",
+		subMenu: "Magic",
+		mpCost: 3,
+		targetRequired: true,
+		targetEnemyByDefault: false,
+		targetAll: MODE.NEVER,
+		userAnimation: "cast",
+		effectSprite: sAttackCure,
+		effectOnTarget: MODE.ALWAYS,
+		stateOfTarget: TARGET.EITHER,
+		func: function(_user, _targets)
+		{
+			for (var i = 0; i < array_length(_targets); i++)
+			{
+				var _damage = irandom_range(15,20);
+				if(array_length (_targets) > 1) _damage = ceil(_damage * 0.75);
+				BattleChangeHP(_targets[i], _damage, stateOfTarget);
+			}
+			BattleChangeMP(_user, -mpCost)
+		}
 	}
 }
 
@@ -78,6 +102,12 @@ enum MODE
 	VARIES = 2
 }
 
+enum TARGET
+{
+	ALIVE = 0,
+	DEAD = 1,
+	EITHER = 2
+}
 
 //Party data
 global.party = 
@@ -89,6 +119,9 @@ global.party =
 		mp: 10,
 		mpMax: 15,
 		strength: 6,
+		experience: 0,
+		maxExp: 10,
+		lvl: 1,
 		sprites : { idle: sLuluIdle, attack: sLuluAttack, defend: sLuluDefend, down: sLuluDown},
 		actions : [global.actionLibrary.attack]
 	}
@@ -100,6 +133,9 @@ global.party =
 		mp: 20,
 		mpMax: 30,
 		strength: 4,
+		experience: 0,
+		maxExp: 10,
+		lvl: 1,
 		sprites : { idle: sQuestyIdle, attack: sQuestyCast, cast: sQuestyCast, down: sQuestyDown},
 		actions : [global.actionLibrary.attack, global.actionLibrary.ice]
 	}
@@ -157,7 +193,31 @@ global.enemies =
 	}
 }
 
+global.levelUps =
+[
 
+	{
+		name: "Lulu",
+		levels:
+		[
+			{
+				level: 2,
+				action: global.actionLibrary.heal
+			}
+		]
+	}
+	,
+	{
+		name: "Questy",
+		levels:
+		[
+			{
+				level: 2,
+				action: global.actionLibrary.heal
+			}
+		]
+	}
+]
 
 
 

@@ -7,6 +7,9 @@ units = [];
 turn = 0;
 unitTurnOrder = [];
 unitRenderOrder = [];
+pages = [];
+pageNum = 0;
+victoryText = "You Won";
 
 turnCount = 0;
 roundCount = 0;
@@ -188,7 +191,7 @@ function BattleStatePerformAction()
 					var _effectSound = currentAction._effectSound;
 					if(variable_struct_exists(currentAction, "effectSpriteNoTarget")) _effectSprite = currentAction.effectSpriteNoTarget;
 					instance_create_depth(x, y, depth-100, oBattleEffect, {sprite_index: _effectSprite});
-					audio_play_sound(_effectSound, 10, false);
+					audio_play_sound(_effectSound, 1, false);
 				}
 			}
 			currentAction.func(currentUser, currentTargets);
@@ -232,20 +235,49 @@ function BattleStateVictoryCheck()
 
 function BattleStateWin()
 {
-	for(var i = 0; i < array_length(partyUnits); i++)
+	var _exp = 0;
+	var _expText = "";
+	
+	if(!array_contains(pages, victoryText))
 	{
-		global.party[i].hp = partyUnits[i].hp;
-		global.party[i].mp = partyUnits[i].mp;
+		array_push(pages, victoryText);
 	}
-	battleText = "You Won";
+	
+	for(var i = 0; i < array_length(enemyUnits); i++)
+	{
+		_exp += enemyUnits[i].xpValue;
+	}
+	_expText =  string_ext("You got {0} exp", [_exp])
+	
 	SetSongInGame(sndWon,0,0);
 	
-	if(keyboard_check_pressed(vk_enter))
+	if(!array_contains(pages, _expText))
 	{
+		array_push(pages, _expText);
+	}
+	
+	if(pageNum < array_length(pages))
+	{
+		battleText = pages[pageNum];
+		
+	}
+	else
+	{
+		for(var i = 0; i < array_length(partyUnits); i++)
+		{
+			global.party[i].hp = partyUnits[i].hp;
+			global.party[i].mp = partyUnits[i].mp;
+			UpdateExp(i, _exp);
+		}
 		SetSongInGame(sndBGMEarth, 60, 10*60);
 		instance_activate_all();
 		instance_destroy(oBattle);
 		exit;
+	}
+	
+	if(keyboard_check_pressed(vk_enter))
+	{
+		pageNum++;
 	}
 }
 
