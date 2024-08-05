@@ -5,7 +5,7 @@ var _inputM = point_distance(0,0,_inputH,_inputV);
 
 
 
-if (_inputM != 0)
+if (_inputM != 0 && !instance_exists(oPauser))
 {
 	direction = _inputD;	
 	image_speed = 1;
@@ -16,7 +16,7 @@ else
 	animIndex = 0;
 }
 
-FourDirectionAnimate();
+
 
 xspd = lengthdir_x(spdWalk*_inputM,_inputD);
 yspd = lengthdir_y(spdWalk*_inputM,_inputD);
@@ -37,6 +37,8 @@ if (instance_exists(oPauser))
 	xspd = 0;
 	yspd = 0;
 }
+
+FourDirectionAnimate();
 
 x += xspd
 y += yspd

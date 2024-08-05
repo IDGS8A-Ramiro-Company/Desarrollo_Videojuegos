@@ -10,8 +10,50 @@ global.actionLibrary =
 		targetEnemyByDefault: true,
 		targetAll: MODE.NEVER,
 		userAnimation: "attack",
+		effectSprite: sAttackSlash,
+		effectSound: sndDamage,
+		effectOnTarget: MODE.ALWAYS,
+		func: function(_user, _targets)
+		{
+			for (var i = 0; i < array_length(_targets); i++)
+			{
+				var _damage = ceil(_user.strength + random_range(-_user.strength * 0.25, _user.strength * 0.25));
+				if(array_length (_targets) > 1) _damage = ceil(_damage * 0.75);
+				BattleChangeHP(_targets[i], -_damage);
+			}
+		}
+	},
+	defend:
+	{
+		name: "Defend",
+		description: "{0} defends!",
+		subMenu: -1,
+		targetRequired: false,
+		targetEnemyByDefault: false,
+		targetAll: MODE.NEVER,
+		userAnimation: "defend",
+		effectOnTarget: MODE.ALWAYS,
+		func: function(_user, _targets)
+		{
+			for (var i = 0; i < array_length(_targets); i++)
+			{
+				var _damage = ceil(_user.strength + random_range(-_user.strength * 0.25, _user.strength * 0.25));
+				if(array_length (_targets) > 1) _damage = ceil(_damage * 0.75);
+				BattleChangeHP(_targets[i], -_damage);
+			}
+		}
+	},
+	tackle:
+	{
+		name: "Tackle",
+		description: "{0} attacks!",
+		subMenu: -1,
+		targetRequired: true,
+		targetEnemyByDefault: true,
+		targetAll: MODE.NEVER,
+		userAnimation: "attack",
 		effectSprite: sAttackBonk,
-		effectSound: sndAttackSlash,
+		effectSound: sndTackle,
 		effectOnTarget: MODE.ALWAYS,
 		func: function(_user, _targets)
 		{
@@ -34,6 +76,7 @@ global.actionLibrary =
 		targetAll: MODE.VARIES,
 		userAnimation: "cast",
 		effectSprite: sAttackIce,
+		effectSound: sndIce,
 		effectOnTarget: MODE.ALWAYS,
 		func: function(_user, _targets)
 		{
@@ -57,6 +100,7 @@ global.actionLibrary =
 		targetAll: MODE.VARIES,
 		userAnimation: "cast",
 		effectSprite: sAttackFire,
+		effectSound: sndFire,
 		effectOnTarget: MODE.ALWAYS,
 		func: function(_user, _targets)
 		{
@@ -79,7 +123,8 @@ global.actionLibrary =
 		targetEnemyByDefault: false,
 		targetAll: MODE.NEVER,
 		userAnimation: "cast",
-		effectSprite: sAttackCure,
+		effectSprite: sAttackHeal,
+		effectSound: sndHeal,
 		effectOnTarget: MODE.ALWAYS,
 		stateOfTarget: TARGET.EITHER,
 		func: function(_user, _targets)
@@ -153,7 +198,7 @@ global.enemies =
 		mpMax: 0,
 		strength: 5,
 		sprites: { idle: sSlime, attack: sSlimeAttack},
-		actions: [global.actionLibrary.attack],
+		actions: [global.actionLibrary.tackle],
 		xpValue : 15,
 		AIscript : function()
 		{
@@ -177,7 +222,7 @@ global.enemies =
 		mpMax: 0,
 		strength: 4,
 		sprites: { idle: sBat, attack: sBatAttack},
-		actions: [],
+		actions: [global.actionLibrary.attack],
 		xpValue : 18,
 		AIscript : function()
 		{

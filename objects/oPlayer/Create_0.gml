@@ -12,5 +12,9 @@ function FourDirectionAnimate() {
 	{
 		animationEnd = true;	
 		animIndex -= _animLength;
-	}else animationEnd = false;
+	}
+	else 
+	{
+		animationEnd = false;
+	}
 }
