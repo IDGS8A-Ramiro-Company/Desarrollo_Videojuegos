@@ -12,7 +12,7 @@ function UpdateExp(_char, _xp)
 		CheckForLvlUp(_char, global.party[_char].lvl);
 		global.party[_char].experience -= global.party[_char].maxExp;
 		global.party[_char].hpMax += _extraHP;
-		if(global.party[_char].hp <= 0)
+		if(global.party[_char].hp > 0)
 		{
 			global.party[_char].hp += _extraHP;
 		}

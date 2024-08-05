@@ -13,7 +13,7 @@ victoryText = "You Won";
 
 turnCount = 0;
 roundCount = 0;
-battleWaitTimeFrames = 30;
+battleWaitTimeFrames = 60;
 battleWaitTimeRemaining = 0;
 battleText = "";
 currentUser = noone;
@@ -176,22 +176,32 @@ function BattleStatePerformAction()
 				acting = false;
 			}
 			
-			if(variable_struct_exists(currentAction, "effectSprite"))
+			if(variable_struct_exists(currentAction, "effectSprite") && variable_struct_exists(currentAction,"effectSound"))
 			{
 				if(currentAction.effectOnTarget == MODE.ALWAYS) || ((currentAction.effectOnTarget == MODE.VARIES) && (array_length(currentTargets) <= 1))
 				{
+					audio_play_sound(currentAction.effectSound, 99, false);
 					for(var i = 0; i < array_length(currentTargets); i++)
 					{
 						instance_create_depth(currentTargets[i].x, currentTargets[i].y, currentTargets[i].depth-1, oBattleEffect, {sprite_index: currentAction.effectSprite});
 					}
+					//if(currentAction.effectSound != sndHeal)
+					//{
+					//	audio_play_sound(sndDamage, 99, false);
+					//}
 				}
 				else //Play it at 0,0
 				{
 					var _effectSprite = currentAction._effectSprite;
 					var _effectSound = currentAction._effectSound;
 					if(variable_struct_exists(currentAction, "effectSpriteNoTarget")) _effectSprite = currentAction.effectSpriteNoTarget;
+					audio_play_sound(_effectSound, 99, false);
 					instance_create_depth(x, y, depth-100, oBattleEffect, {sprite_index: _effectSprite});
-					audio_play_sound(_effectSound, 1, false);
+					if(instance_exists(oBattleEffect) && _effectSound != sndHeal)
+					{
+						audio_play_sound(sndDamage, 99, false);
+					}
+					
 				}
 			}
 			currentAction.func(currentUser, currentTargets);
