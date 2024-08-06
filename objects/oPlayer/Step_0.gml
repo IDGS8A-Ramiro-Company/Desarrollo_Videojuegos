@@ -2,7 +2,7 @@ var _inputH = keyboard_check(vk_right) - keyboard_check(vk_left);
 var _inputV = keyboard_check(vk_down) - keyboard_check(vk_up);
 var _inputD = point_direction(0,0,_inputH,_inputV);
 var _inputM = point_distance(0,0,_inputH,_inputV);
-
+var _inputEsc = keyboard_check_pressed(vk_escape);
 
 
 if (_inputM != 0 && !instance_exists(oPauser))
@@ -46,3 +46,11 @@ y += yspd
 //Depth
 depth = -bbox_bottom;
 
+if(_inputEsc)
+{
+	if(!instance_exists(oMainMenu))
+	{
+		PauseAndPlay(2);
+	instance_create_depth(0, 0, -99999, oFieldMenu);
+	}
+}

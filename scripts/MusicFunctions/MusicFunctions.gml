@@ -9,3 +9,20 @@ function SetSongInGame( _song, _fadeOutCurrentSong = 0, _fadeInNextSong = 0)
 		startFadeInTime = _fadeInNextSong;
 	}
 }
+
+function PauseAndPlay(_state)
+{
+	switch(_state)
+	{
+		//Full
+		case 1:
+			global.masterVolume = global.masterVolume * 4;
+			break;
+		
+		//Pause
+		case 2:
+			global.masterVolume = global.masterVolume / 4;
+			break;
+	}
+	
+}

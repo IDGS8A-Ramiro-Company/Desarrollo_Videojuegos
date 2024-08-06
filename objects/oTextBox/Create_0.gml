@@ -2,7 +2,7 @@
 // You can write your code in this editor
 depth = -9999;
 textBoxWidth = 200;
-textBoxHeight = 64;
+textBoxHeight = 40;
 border = 8;
 lineSep = 12;
 line_width = textBoxWidth - border * 2;

@@ -2,14 +2,18 @@
 // You can write your code in this editor
 accept_key = keyboard_check_pressed(vk_enter);
 
+
 textBox_X = camera_get_view_x(view_camera[0]);
-textBox_Y = camera_get_view_x(view_camera[0]) + 100;
+textBox_Y = camera_get_view_y(view_camera[0]) + 10;
+
+
+
 
 if(setup == false)
 {
 	setup = true;
 	draw_set_font(fnM5x7);
-	draw_set_valign(fa_top);
+	draw_set_valign(fa_center);
 	draw_set_halign(fa_left);
 	
 	pageNumber = array_length(text);
