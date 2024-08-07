@@ -6,11 +6,20 @@ for(var i = 0; i < array_length(global.party); i++)
 	global.party[i].mp = global.party[i].mpMax;
 }
 
-if(!instance_exists(oTextBox))
+//if(!instance_exists(oTextBox))
+//{
+//	with (instance_create_depth(0, 0, -9999, oTextBox))
+//	{
+//		AddText("Your Party is fully healed")
+//	}
+//}
+
+if(!instance_exists(oCredits))
 {
-	with (instance_create_depth(0, 0, -9999, oTextBox))
+	with (instance_create_depth(0, 0, -9999, oCredits))
 	{
-		AddText("Your Party is fully healed")
+		NewDialog(DIALOGTYPE.NORMAL);
+		AddText("Your Party is fully healed");
 	}
 }
 

@@ -18,6 +18,8 @@ function UpdateExp(_char, _xp)
 		}
 		global.party[_char].mpMax += _extraMP;
 		global.party[_char].mp += _extraMP;
+		global.party[_char].maxExp += 30;
+		global.party[_char].strength += global.levelUps[_char].strength
 		
 	}
 }
@@ -30,6 +32,7 @@ function CheckForLvlUp(_char, _lvl)
 		{
 			array_push(global.party[_char].actions, global.levelUps[_char].levels[i].action)
 		}
+		
 	}
 	
 }

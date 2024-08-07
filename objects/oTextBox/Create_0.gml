@@ -3,7 +3,7 @@
 depth = -9999;
 textBoxWidth = 200;
 textBoxHeight = 40;
-border = 8;
+border = 10;
 lineSep = 12;
 line_width = textBoxWidth - border * 2;
 txtb_spr = sBox;

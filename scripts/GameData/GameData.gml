@@ -154,6 +154,13 @@ enum TARGET
 	EITHER = 2
 }
 
+enum DIALOGTYPE
+{
+	NORMAL = 1,
+	STORY = 2,
+	CREDITS = 3
+}
+
 //Party data
 global.party = 
 [
@@ -182,7 +189,7 @@ global.party =
 		maxExp: 10,
 		lvl: 1,
 		sprites : { idle: sQuestyIdle, attack: sQuestyCast, cast: sQuestyCast, down: sQuestyDown},
-		actions : [global.actionLibrary.attack, global.actionLibrary.ice]
+		actions : [global.actionLibrary.attack, global.actionLibrary.fire]
 	}
 ]
 
@@ -243,6 +250,7 @@ global.levelUps =
 
 	{
 		name: "Lulu",
+		strength: 8,
 		levels:
 		[
 			{
@@ -254,11 +262,12 @@ global.levelUps =
 	,
 	{
 		name: "Questy",
+		strength: 2,
 		levels:
 		[
 			{
 				level: 2,
-				action: global.actionLibrary.heal
+				action: global.actionLibrary.ice
 			}
 		]
 	}

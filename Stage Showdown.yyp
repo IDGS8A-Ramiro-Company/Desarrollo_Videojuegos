@@ -37,7 +37,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.4.0.137",
+    "IDEVersion":"2024.6.2.162",
   },
   "name":"Stage Showdown",
   "resources":[
@@ -54,6 +54,7 @@
     {"id":{"name":"oBattleUnitPC","path":"objects/oBattleUnitPC/oBattleUnitPC.yy",},},
     {"id":{"name":"oBattleWarp","path":"objects/oBattleWarp/oBattleWarp.yy",},},
     {"id":{"name":"oCamera","path":"objects/oCamera/oCamera.yy",},},
+    {"id":{"name":"oCredits","path":"objects/oCredits/oCredits.yy",},},
     {"id":{"name":"oFieldMenu","path":"objects/oFieldMenu/oFieldMenu.yy",},},
     {"id":{"name":"oHealBox","path":"objects/oHealBox/oHealBox.yy",},},
     {"id":{"name":"oMainMenu","path":"objects/oMainMenu/oMainMenu.yy",},},
@@ -70,6 +71,7 @@
     {"id":{"name":"oWarp_Block","path":"objects/oWarp_Block/oWarp_Block.yy",},},
     {"id":{"name":"oWarp","path":"objects/oWarp/oWarp.yy",},},
     {"id":{"name":"rmCity","path":"rooms/rmCity/rmCity.yy",},},
+    {"id":{"name":"rmCredits","path":"rooms/rmCredits/rmCredits.yy",},},
     {"id":{"name":"rmField","path":"rooms/rmField/rmField.yy",},},
     {"id":{"name":"rmInit","path":"rooms/rmInit/rmInit.yy",},},
     {"id":{"name":"rmInside","path":"rooms/rmInside/rmInside.yy",},},
@@ -145,6 +147,7 @@
     {"roomId":{"name":"rmField","path":"rooms/rmField/rmField.yy",},},
     {"roomId":{"name":"rmCity","path":"rooms/rmCity/rmCity.yy",},},
     {"roomId":{"name":"rmInside","path":"rooms/rmInside/rmInside.yy",},},
+    {"roomId":{"name":"rmCredits","path":"rooms/rmCredits/rmCredits.yy",},},
   ],
   "templateType":null,
   "TextureGroups":[
