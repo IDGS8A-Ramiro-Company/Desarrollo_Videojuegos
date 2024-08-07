@@ -1,6 +1,6 @@
 //instance_deactivate_all(true);
 instance_deactivate_layer("Instances")
-SetSongInGame(sndBGMBattle, 0, 0);
+
 
 units = [];
 
@@ -63,6 +63,7 @@ RefreshRenderOrder = function()
 
 RefreshRenderOrder();
 
+SetSongInGame(sndBGMBattle, 0, 0);
 function BattleStateSelectAction()
 {
 	if(!instance_exists(oMenu))
@@ -279,9 +280,11 @@ function BattleStateWin()
 			global.party[i].mp = partyUnits[i].mp;
 			UpdateExp(i, _exp);
 		}
-		SetSongInGame(sndBGMEarth, 60, 10*60);
+		
+		SetSongInGame(prevSong, 60, 5*60);
 		instance_activate_all();
-		instance_destroy(oBattle);
+		instance_destroy(creator);
+		instance_destroy();
 		exit;
 	}
 	

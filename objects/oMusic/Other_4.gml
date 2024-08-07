@@ -14,3 +14,18 @@ if(room == rmMainMenu)
 {
 	SetSongInGame( sndMenu, 30, 0);
 }
+
+if(room == rmInitialDialog)
+{
+	SetSongInGame( sndBGMOpening, 30, 0);
+}
+
+if(room == rmCredits)
+{
+	SetSongInGame( sndBGMCredits, 30, 0);
+}
+
+if(room == rmInside)
+{
+	SetSongInGame( sndBGMInside, 30, 0);
+}

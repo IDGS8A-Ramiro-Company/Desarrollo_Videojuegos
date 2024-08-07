@@ -1,6 +1,5 @@
-if(!instance_exists(oBattleWarp))
+if(!instance_exists(oBattleWarp) && !instance_exists(oBattle))
 {
 	NewBattleAnimation([global.enemies.slimeG, global.enemies.slimeG], sBgField);
 }
-SetSongInGame(sndBattleStart, 0, 0);
-instance_destroy(self);
+//instance_destroy();

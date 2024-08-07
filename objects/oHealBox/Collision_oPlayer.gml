@@ -14,9 +14,9 @@ for(var i = 0; i < array_length(global.party); i++)
 //	}
 //}
 
-if(!instance_exists(oCredits))
+if(!instance_exists(oDialog))
 {
-	with (instance_create_depth(0, 0, -9999, oCredits))
+	with (instance_create_depth(0, 0, -9999, oDialog))
 	{
 		NewDialog(DIALOGTYPE.NORMAL);
 		AddText("Your Party is fully healed");
