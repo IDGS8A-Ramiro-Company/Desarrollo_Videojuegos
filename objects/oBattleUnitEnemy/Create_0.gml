@@ -1,4 +1,6 @@
 // Inherit the parent event
 event_inherited();
-
-image_xscale = -1;
+if(!(sprite_index == sCrocIdle))
+{
+	image_xscale = -1;
+}

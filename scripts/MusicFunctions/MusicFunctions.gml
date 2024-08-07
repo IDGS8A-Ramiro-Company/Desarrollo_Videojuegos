@@ -10,6 +10,16 @@ function SetSongInGame( _song, _fadeOutCurrentSong = 0, _fadeInNextSong = 0)
 	}
 }
 
+function GetCurrentSong()
+{
+	var _currentSong = noone;
+	with (oMusic)
+	{
+		_currentSong = songAsset;
+	}
+	return _currentSong;
+}
+
 function PauseAndPlay(_state)
 {
 	switch(_state)

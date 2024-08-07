@@ -13,7 +13,7 @@ if(setup == false)
 {
 	setup = true;
 	draw_set_font(fnM5x7);
-	draw_set_valign(fa_center);
+	draw_set_valign(fa_middle);
 	draw_set_halign(fa_left);
 	
 	pageNumber = array_length(text);
@@ -58,4 +58,4 @@ draw_sprite_ext(txtb_spr, txtb_img, textBox_X + textXOffset[page], textBox_Y, te
 
 var _drawText = string_copy(text[page], 1, drawChar);
 
-draw_text_ext(textBox_X + textXOffset[page] + border, textBox_Y + border, _drawText, lineSep, line_width)
+draw_text_ext(textBox_X + textXOffset[page] + border, textBox_Y + border, _drawText, lineSep, line_width);

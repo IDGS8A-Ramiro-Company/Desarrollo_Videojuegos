@@ -1,5 +1,5 @@
 {
-  "$GMScript":"",
+  "$GMScript":"v1",
   "%Name":"XPFunctions",
   "isCompatibility":false,
   "isDnD":false,
