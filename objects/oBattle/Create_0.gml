@@ -1,6 +1,6 @@
 //instance_deactivate_all(true);
-instance_deactivate_layer("Instances")
-
+//instance_deactivate_layer("Instances")
+instance_deactivate_object(oField)
 
 units = [];
 

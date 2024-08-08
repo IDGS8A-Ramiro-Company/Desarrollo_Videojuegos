@@ -16,4 +16,19 @@ function NewDialog(_type, _roomGo = noone)
 	}
 }
 
+function NewInteraction(_type, _text, _roomGo = noone)
+{
+	if(!instance_exists(oDialog) && _type != undefined)
+	{
+		with (instance_create_depth(0, 0, -9999, oDialog))
+		{
+			NewDialog(_type, _roomGo);
+			for(var i = 0; i < array_length(_text); i++)
+			{
+				AddText(_text[i]);
+			}
+			
+		}
+	}
+}
 

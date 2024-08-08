@@ -13,7 +13,10 @@
     "name":"Field",
     "path":"folders/Objects/Field.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"oField",
+    "path":"objects/oField/oField.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,

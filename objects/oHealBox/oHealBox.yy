@@ -12,7 +12,10 @@
     "name":"Field",
     "path":"folders/Objects/Field.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"oField",
+    "path":"objects/oField/oField.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -31,8 +34,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"Sprite37",
-    "path":"sprites/Sprite37/Sprite37.yy",
+    "name":"sHeal",
+    "path":"sprites/sHeal/sHeal.yy",
   },
   "spriteMaskId":null,
   "visible":true,

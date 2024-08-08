@@ -16,8 +16,7 @@ txtb_img_spd = 0;
 
 page = 0;
 pageNumber = 0;
-textDialog[0] = "A Ramiro Company Production \nCreditos:\nJesus Angel de la Cruz Vargas \nFrancisco Javier Reyes Reyna \nJose Gabriel Cardenas Vazquez \nAlan Nunez Velazquez";
-textDialog[1] = "Gracias"
+textDialog[0] = "";
 textLength[0] = string_length(textDialog[0]);
 drawChar = 0;
 textSpd = 1;

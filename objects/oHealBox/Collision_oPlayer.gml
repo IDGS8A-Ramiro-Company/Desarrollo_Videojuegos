@@ -19,7 +19,7 @@ if(!instance_exists(oDialog))
 	with (instance_create_depth(0, 0, -9999, oDialog))
 	{
 		NewDialog(DIALOGTYPE.NORMAL);
-		AddText("Your Party is fully healed");
+		AddText("Tu y tus amigos han sido curados");
 	}
 }
 
