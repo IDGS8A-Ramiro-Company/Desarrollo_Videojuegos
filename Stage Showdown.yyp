@@ -136,6 +136,7 @@
     {"id":{"name":"sSlash","path":"sprites/sSlash/sSlash.yy",},},
     {"id":{"name":"sSlime","path":"sprites/sSlime/sSlime.yy",},},
     {"id":{"name":"sSlimeAttack","path":"sprites/sSlimeAttack/sSlimeAttack.yy",},},
+    {"id":{"name":"ssLuluRunNothing","path":"sprites/ssLuluRunNothing/ssLuluRunNothing.yy",},},
     {"id":{"name":"sSpeak","path":"sprites/sSpeak/sSpeak.yy",},},
     {"id":{"name":"sTicket","path":"sprites/sTicket/sTicket.yy",},},
     {"id":{"name":"sTiles","path":"sprites/sTiles/sTiles.yy",},},

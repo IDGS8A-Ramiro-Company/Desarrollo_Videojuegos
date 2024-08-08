@@ -1,4 +1,4 @@
-if(active)
+if(active && !instance_exists(oPauser))
 {
 	//Keyboard Controls
 	hover += keyboard_check_pressed(vk_down) - keyboard_check_pressed(vk_up)
